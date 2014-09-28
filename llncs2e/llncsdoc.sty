@@ -1,0 +1,68 @@
+% This is LLNCSDOC.STY the modification of the
+% LLNCS class file for the documentation of
+% the class itself.
+%
+\def\AmS{{\protect\usefont{OMS}{cmsy}{m}{n}%
+  A\kern-.1667em\lower.5ex\hbox{M}\kern-.125emS}}
+\def\AmSTeX{{\protect\AmS-\protect\TeX}}
+%
+\def\ps@myheadings{\let\@mkboth\@gobbletwo
+\def\@oddhead{\hbox{}\hfil\small\rm\rightmark
+\qquad\thepage}%
+\def\@oddfoot{}\def\@evenhead{\small\rm\thepage\qquad
+\leftmark\hfil}%
+\def\@evenfoot{}\def\sectionmark##1{}\def\subsectionmark##1{}}
+\ps@myheadings
+%
+\setcounter{tocdepth}{2}
+%
+\renewcommand{\labelitemi}{--}
+\newenvironment{alpherate}%
+{\renewcommand{\labelenumi}{\alph{enumi})}\begin{enumerate}}%
+{\end{enumerate}\renewcommand{\labelenumi}{enumi}}
+%
+\def\bibauthoryear{\begingroup
+\def\thebibliography##1{\section*{References}%
+    \small\list{}{\settowidth\labelwidth{}\leftmargin\parindent
+    \itemindent=-\parindent
+    \labelsep=\z@
+    \usecounter{enumi}}%
+    \def\newblock{\hskip .11em plus .33em minus -.07em}%
+    \sloppy
+    \sfcode`\.=1000\relax}%
+    \def\@cite##1{##1}%
+    \def\@lbibitem[##1]##2{\item[]\if@filesw
+      {\def\protect####1{\string ####1\space}\immediate
+    \write\@auxout{\string\bibcite{##2}{##1}}}\fi\ignorespaces}%
+\begin{thebibliography}{}
+\bibitem{DBLP:taylor} Bradley Taylor, “Sender reputation in a large webmail service,” in CEAS, 2006.
+
+\bibitem{lazzari} Lazzari, L. and Mari, M. and Poggi, A., “A collaborative and multi-agent system for e-mail filtering and classification,” in Collaborative Computing: Networking, Applications and Worksharing, 2005 International Conference on, 2005, pp. 8 pp.–
+
+\bibitem{ding} Qing Ding and Xi Li and Ming Jiang and Xuehai Zhou, “Reputation management in vehicular ad hoc networks,” in Multimedia Technology (ICMT), 2010 International Conference on, Oct 2010, pp. 1–5.
+
+\bibitem{park} Soyoung Park and Aslam, B. and Zou, C., “Long-term reputation system for vehicular networking based on vehicle’s daily commute routine,” in Consumer Communications and Networking Conference (CCNC), 2011 IEEE, Jan 2011, pp. 436–441.
+
+\bibitem{altman} Altman, Alon and Tennenholtz, Moshe, “Ranking systems: The pagerank axioms,” in Proceedings of the 6th ACM Conference on Electronic Commerce, ser. EC ’05. New York, NY, USA: ACM, 2005, pp. 1–8. [Online]. Available: http://doi.acm.org/10.1145/1064009.1064010
+
+\bibitem{page} Page, L. and Brin, S. and Motwani, R. and Winograd, T., “The pagerank citation ranking: Bringing order to the web,” in Proceedings of the 7th International World Wide Web Conference, Brisbane, Australia, 1998, pp. 161–172. [Online]. Available: citeseer.nj.nec.com/page98pagerank.html
+
+\bibitem{resnick} Resnick, Paul and Zeckhauser, Richard, “Trust among strangers in Internet transactions: Empirical analysis of eBay’s reputation system,” in The Economics of the Internet and E-Commerce, ser. Advances in Applied Microeconomics, M. R. Baye, Ed. Elsevier Science, 2002, vol. 11, pp. 127–157. [Online]. Available: http://www.si.umich.edu/ presnick/papers/ebayNBER/index.html
+
+\bibitem{chruch} Church, Kenneth Ward and Hanks, Patrick, “Word association norms, mutual information, and lexicography,” Comput. Linguist., vol. 16, no. 1, pp. 22–29, Mar. 1990. [Online]. Available: http://dl.acm.org/citation.cfm?id=89086.89095
+
+\bibitem{romashchenko} Romashchenko, A., “Extracting the mutual information for a triple of binary strings,” in Computational Complexity, 2003. Proceedings. 18th IEEE Annual Conference on, July 2003, pp. 221–229.
+
+\bibitem{kaza} Kaza, S. and Tao Wang and Gowda, H. and Hsinchun Chen, “Target vehicle identification for border safety using mutual information,” in Intelligent Transportation Systems, 2005. Proceedings. 2005 IEEE, Sept 2005, pp. 1141–1146.
+
+\bibitem{li} Li Xiang-wei and Zhao Shuang-ping, “A novel web authoritative page mining algorithm based on association analysis,” in Knowledge Acquisition and Modeling (KAM), 2011 Fourth International Symposium on, Oct 2011, pp. 136–138.
+
+\bibitem{zhuang} Ziyun Zhuang and Bo Zhang, “Application of association analysis in digital content industry,” in Computational Intelligence and Design (ISCID), 2012 Fifth International Symposium on, vol. 1, Oct 2012, pp. 18–21.
+
+\bibitem{miao} Miao, Gengxin and Guan, Ziyu and Moser, Louise E. and Yan, Xifeng and Tao, Shu and Anerousis, Nikos and Sun, Jimeng, “Latent association analysis of document pairs,” in Proceedings of the 18th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, ser. KDD ’12. New York, NY, USA: ACM, 2012, pp. 1415–1423. [Online]. Available: http://doi.acm.org/10.1145/2339530.2339752
+%
+%\bibitem[1982]{clar:eke3} Clarke, F., Ekeland, I.: Nonlinear
+%oscillations and boundary-value problems for Hamiltonian systems.
+%Arch. Rat. Mech. Anal. 78, 315--333 (1982)
+\end{thebibliography}
+\endgroup}
