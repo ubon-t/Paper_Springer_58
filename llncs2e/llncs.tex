@@ -21,10 +21,10 @@
 %%%% list of authors for the TOC (use if author list has to be modified)
 \tocauthor{Ubon Thongsatapornwatana and Chanatip Chuenmanuso}
 %
-\institute{Department of Research and Development,\\Defence Technology Institute, Ministry of Defence, \\Nonthaburi, Thailand,\\
-\email{ubon.t@dti.or.th; chanatip.c@dti.or.th}
+\institute{Department of Research and Development\\Defence Technology Institute, Ministry of Defence \\Nonthaburi, Thailand\\
+\email{ubon.t@dti.or.th, chanatip.c@dti.or.th}
 }
-
+\pagestyle{empty}
 \maketitle              % typeset the title of the contribution
 
 % 
@@ -108,7 +108,7 @@ The result shows that the reputation algorithm and the association analysis conc
 
 \section{Introduction}
 %
-Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi,Dhurandher,Ayday}, filtering email spam \cite{Xie,Chirita:Mailrank,West:Spam,Zhang:Ipgrouprep}, ecommerce \cite{altman,page,WangLin}, etc.
+Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi}, \cite{Dhurandher}, \cite{Ayday}, filtering email spam \cite{Xie}, \cite{Chirita:Mailrank}, \cite{West:Spam}, \cite{Zhang:Ipgrouprep}, ecommerce \cite{altman}, \cite{page}, \cite{WangLin}, etc.
 In addition, vehicle detection by only data classification process may be insufficient. Therefore, the association analysis process should be used together to increase the detection accuracy.
 The traditional suspect vehicle detection process of comparing criminal license plates and vehicle license plates utilizing the matching of alphabet character is not effective. If the characters do not match any one character, the system can not detect criminal or suspect vehicles with fake
 license plate.
@@ -197,22 +197,17 @@ Moreover, this testbed consists of the lists of the checkpoint crossing data set
 \begin{center}
 \renewcommand{\arraystretch}{1.4}
 \setlength\tabcolsep{3pt}
-\begin{tabular}{ll}
+\begin{tabular}{lr}
 \hline\noalign{\smallskip}
 $Input Data Set$ & $Summary$\\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
  Number of the criminal vehicles in blacklist & 4801 \\
-\hline
 Criminal activity records & 1972\\
-\hline
 The one year checkpoint crossing records & 992017\\
-\hline
 The real time checkpoint crossing records in three months & 281089\\
-\hline
 Number of the vehicles crossing the checkpoint in three months& 90563\\
-\hline
 Number of criminal vehicles crossing the checkpoint in three months& 513\\
 \hline
 \end{tabular}
@@ -223,6 +218,7 @@ Number of criminal vehicles crossing the checkpoint in three months& 513\\
 %
 \begin{figure*}
 \centering
+\vspace{1.8mm}
 \includegraphics[width=1\textwidth]{images/myfigure.pdf}
 \caption{Research design and process diagram.}
 \label{fig:diagram}
@@ -236,6 +232,7 @@ Fig. \ref{fig:diagram} shows the research design and the evolution process of cr
 \subsubsection{Matching Score Module}
 %
 \begin{figure}
+\vspace{1.8mm}
 \centering
 \includegraphics[width=1\textwidth]{images/MatchingAlgorithm.jpg}
 \caption{Matching score module algorithm.}
@@ -265,33 +262,19 @@ $Variables$ & $Description$\\
 \hline
 \noalign{\smallskip}
  VCDataLicenseplate & The license plate of vehicle that crossing the checkpoint. \\
-\hline
 VCDataColor & The color of vehicle that crossing the checkpoint.\\
-\hline
 VCDataBrand & The brand of vehicle that crossing the checkpoint.\\
-\hline
 VCDataType & The type of vehicle that crossing the checkpoint.\\
-\hline
 CVDataLicenseplate & The license plate of the criminal vehicle.\\
-\hline
 CVDataColor & The color of the criminal vehicle.\\
-\hline
 CVDataBrand & The brand of the criminal vehicle.\\
-\hline
 CVDataType & The type of the criminal vehicle.\\
-\hline
 WLicenseplate & The weight of license plate.\\
-\hline
 WColor & The weight of vehicle color.\\
-\hline
 WBrand & The weight of vehicle brand.\\
-\hline
 WType & The weight of vehicle type.\\
-\hline
 Score & The sum of all of the weighted attribute.\\
-\hline
 HScore & The high score threshold.\\
-\hline
 LScore & The low score threshold.\\
 \hline
 \end{tabular}
@@ -320,6 +303,7 @@ If the vehicles with higher ratio than the threshold, they are considered potent
 Algorithm of Vehicle association with Criminal Activity Score Module is shown in Fig. \ref{fig:activityAlgo}. Table \ref{table_variableActivity} summarizes the notation for Vehicle Association with Criminal Activity Score Module.
 
 \begin{figure}
+%\vspace{1.8mm}
 \centering
 \includegraphics[width=1\textwidth]{images/activityAlgorithm2.jpg}
 \caption{Vehicles association with criminal activity score module algorithm.}
@@ -340,26 +324,16 @@ $Variables$ & $Description$\\
 \hline
 \noalign{\smallskip}
 ActivityLoop & The variable that used to check first iteration in x loop.\\
-\hline
 TVData & The target vehicle data includes license plate, 
 vehicle color, \\ & vehicle brand, and vehicle type.\\
-\hline
 VCHData & The one year record of checkpoint crossing data set includes  \\ & license plate, vehicle color, vehicle brand, and vehicle type.\\
-\hline
 NTVLog & Total of one year checkpoint crossing records of target vehicle.\\
-\hline
 CAChcekpoint & The checkpoint near the location of the criminal activity.\\
-\hline
 VCHCheckpoint & The checkpoint that target vehicle has ever passed.\\
-\hline
 VCHTime & Date and time of the checkpoint crossing record.\\
-\hline
 mxTimeRang & Date and time of the criminal activity plus 1 hour.\\
-\hline
 mnTimeRang & Date and time of the criminal activity minus 1 hour.\\
-\hline
 NData & Number of involvement in criminal activities of target vehicle.\\
-\hline
 HScore & The defined threshold.\\
 \hline
 \end{tabular}
@@ -393,15 +367,10 @@ $Variables$ & $Description$\\
 \hline
 \noalign{\smallskip}
 NofCSVDetectedAsCSV & The number of the criminal and suspect vehicles that \\ & are detected as the criminal and suspect vehicle.\\
-\hline
 TofCSV & The total of all the criminal and suspect vehicles.\\
-\hline
 NofCSVDetectedAsNV & The number of the criminal and suspect vehicles that \\ & are detected as the normal vehicle.\\
-\hline
 NofNVDetectedAsNV & The number of the normal vehicles that are detected \\ & as the normal vehicle.\\
-\hline
 TofNV & The total of all the normal vehicles.\\
-\hline
 NofNVDetectedAsCSV & The number of the normal vehicles that are detected \\ & as the criminal and suspect vehicle.\\
 \hline
 \end{tabular}
@@ -414,14 +383,13 @@ NofNVDetectedAsCSV & The number of the normal vehicles that are detected \\ & as
 \begin{center}
 \renewcommand{\arraystretch}{1.4}
 \setlength\tabcolsep{3pt}
-\begin{tabular}{lll}
+\begin{tabular}{lrr}
 \hline\noalign{\smallskip}
 $Vehicle Detection$ & $Traditional Process$ & $Novel Process$\\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
 Criminal Vehicles & 106 & 106\\
-\hline
 Suspect Vehicles & 0 & 147\\
 \hline
 \end{tabular}
@@ -434,20 +402,16 @@ Suspect Vehicles & 0 & 147\\
 \begin{center}
 \renewcommand{\arraystretch}{1.4}
 \setlength\tabcolsep{3pt}
-\begin{tabular}{lll}
+\begin{tabular}{lrr}
 \hline\noalign{\smallskip}
 $Analysis Rate$ & $Traditional Process$ & $Novel Process$\\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
 TP Rate & 20.66\% & 49.32\%\\
-\hline
 FN Rate & 79.34\% & 50.68\%\\
-\hline
 TN Rate & 100\% & 98.87\%\\
-\hline
 FP Rate & 0\% & 1.13\%\\
-\hline
 Detection Accurate Rate & 60.33\% & 74.09\%\\
 \hline
 \end{tabular}
@@ -455,6 +419,7 @@ Detection Accurate Rate & 60.33\% & 74.09\%\\
 \end{table}
 
 \begin{figure}
+%\vspace{1.8mm}
 \centering
 \includegraphics[width=0.9\textwidth]{images/results.pdf}
 \caption{The results of the system performance analysis.}
@@ -480,25 +445,9 @@ In addition, we intend to explore the behavior of criminal vehicles crossing the
 %
 % ---- Bibliography ----
 %
-\begin{thebibliography}{}
+\begin{thebibliography}{15}
 %
-%0 Book Section
-%D 2008
-%@ 978-3-540-69207-2
-%B Intelligence and Security Informatics
-%V 135
-%S Studies in Computational Intelligence
-%E Chen, Hsinchun
-%E Yang, ChristopherC.
-%R 10.1007/978-3-540-69209-6_16
-%T Suspect Vehicle Identification for Border Safety
-%U http://dx.doi.org/10.1007/978-3-540-69209-6_16
-%I Springer Berlin Heidelberg
-%8 2008-01-01
-%A Kaza, Siddharth
-%A Chen, Hsinchun
-%P 305-318
-%G English
+
 \bibitem{ZezhiChen}
 Z. Chen, N. Pears, M. Freeman, and J. Austin: A gaussian mixturemodel and support vector machine approach to vehicle type and colour classification, Intelligent Transport Systems, IET, vol. 8, no. 2, pp. 135-144, March 2014.
 
