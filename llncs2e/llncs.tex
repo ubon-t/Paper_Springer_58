@@ -117,16 +117,49 @@ From our extensive experiments, the results show that the reputation algorithm a
 
 \section{Introduction}
 %
+Automobile License Plate Recognition (ALPR) becomes an important trend in Intelligent Transportation Systems (ITSs).
+Because the license plate is a unique ID for a vehicle that can use to automatic recognition vehicles by reading license plates from photos or video recorded.
+In addition, license plate recognition (LPR) has been widely applied in many uses.
+For example, the LPR system can be used in smart border safety to monitor vehicles entering and leaving the country, recording license plates with a location and date and time of entry using license plate readers. 
+These records are used to match the vehicle blacklist to detect the criminal/suspect vehicles crossing the border.
+In addition to that, LPR can be used in smart parking areas or smart toll stations to help facilitate the vehicles bearing authorized license plates that the gates is opened when the vehicles have authorization.
+The intelligentized traffic management and traffic safety enforcement also use LPR to implementing the processes.
+Furthermore, the security control of restricted areas can
+improve the intruder prevention capability by using LPR to detect license plates authorization.
+
+For the vehicle recognition method, there are several methods such as vehicle type recognition,  vehicle color recognition,  vehicle brand recognition, and vehicle model recognition to help facilitate the vehicle detection process \cite{ShengITS}, \cite{AshtariITS}, \cite{ZezhiChen}, \cite{Friedman}, \cite{Stauffer}, \cite{Hsieh}.
+However, the suspect vehicle detection by only vehicle recognition previously mentioned to detect the criminal/suspect vehicles may be insufficient.
+Because the suspect vehicle detection system normally compares the list of blacklisted license plates in the checkpoint database and vehicle license plates gathering from LPR method to identify the criminal or suspect vehicles.
+This traditional process of comparing those license plates utilizing the matching of alphabet character is not effective.
+The system unable to detect the criminal/suspect vehicles with forged license plate if the characters of the licence plate do not totoally match with the blacklisted license plates.
+
+In this paper, we propose the approach includes two techniques to detect the criminal or suspect vehicles that crossing the checkpoint.
+In the first technique, we use reputation algorithm to detect the criminal/suspect vehicles that crossing the checkpoint which license plates from ALPR match with the blacklist in the checkpoint database.
 Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi}, \cite{Dhurandher}, \cite{Ayday}, filtering email spam \cite{Xie}, \cite{Chirita:Mailrank}, \cite{West:Spam}, \cite{Zhang:Ipgrouprep}, ecommerce \cite{altman}, \cite{page}, \cite{WangLin}, etc.
-In addition, vehicle detection by only data classification process may be insufficient. Therefore, the association analysis process should be used together to increase the detection accuracy.
-The traditional suspect vehicle detection process of comparing criminal license plates and vehicle license plates utilizing the matching of alphabet character is not effective. If the characters do not match any one character, the system can not detect criminal or suspect vehicles with fake
-license plate.
+The vehicle detection by only data classification process may be insufficient. Therefore, the association analysis process should be used together to increase the detection accuracy.
+%
+In the second technique, we use association analysis concept to detect the suspect vehicles which license plates do not match the blacklist.
+However this method uses color, brand and type of vehicles obtained from the vehicle recognition previously mentioned matching the blacklist to identify the vehicles crossing the checkpoint that might relate to the criminal activity records.
+We consider the involvement in criminal activities by analyzing the vehicles already crossed the checkpoint near the location, date, and time of the criminal activities records.
+Our two techniques can detect the suspect vehicles with forged license plate by using color, brand and type of the vehicles instead of only the license plate number matching method.
+A blacklist of criminal vehicles and criminal activity recorded obtain from a criminal report database of Defence Technology Institute (DTI), Thailand.
+The aim of this work is to improve the detection capability of the suspect vehicle detection system.
 
-In this paper, we propose the approach using reputation concept to detect criminal vehicles crossing the checkpoint whose license plates match the blacklist. 
-In addition, we use association analysis concept to detect the suspect vehicles which license plates do not match the blacklist, however this method uses color, brand and type of vehicles matching the blacklist to identify the vehicles that potentially involve in criminal activity.
-The aim of this work is to improve the detection capability of suspect vehicle detection system.
+In the next section, we discuss background information and previous studies
+using reputation algorithm and association analysis concept. Section III explains
+the research testbed and research design. Experimental results are shown in
+Section IV, and discussed in Section V. Section VI concludes and presents future
+directions.
+%
+%Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi}, \cite{Dhurandher}, \cite{Ayday}, filtering email spam \cite{Xie}, \cite{Chirita:Mailrank}, \cite{West:Spam}, \cite{Zhang:Ipgrouprep}, ecommerce \cite{altman}, \cite{page}, \cite{WangLin}, etc.
+%In addition, vehicle detection by only data classification process may be insufficient. Therefore, the association analysis process should be used together to increase the detection accuracy.
+%The traditional suspect vehicle detection process of comparing criminal license plates and vehicle license plates utilizing the matching of alphabet character is not effective. If the characters do not match any one character, the system can not detect criminal or suspect vehicles with forged license plate.
 
-In the next section, we discuss background information and previous studies using reputation algorithm and association analysis concept. Section III explains the research testbed and research design. Experimental results are shown in Section IV, and discussed in Section V. Section VI concludes and presents future directions.
+%In this paper, we propose the approach using reputation concept to detect criminal vehicles crossing the checkpoint whose license plates match the blacklist. 
+%In addition, we use association analysis concept to detect the suspect vehicles which license plates do not match the blacklist, however this method uses color, brand and type of vehicles matching the blacklist to identify the vehicles that potentially involve in criminal activity.
+%The aim of this work is to improve the detection capability of suspect vehicle detection system.
+
+%In the next section, we discuss background information and previous studies using reputation algorithm and association analysis concept. Section III explains the research testbed and research design. Experimental results are shown in Section IV, and discussed in Section V. Section VI concludes and presents future directions.
 %
 \section{Literature Review}
 %
@@ -158,7 +191,7 @@ Furthermore, Thiel \cite{Thiel} use The VIRTUAL GUARD system for detecting poten
 This system will alarm when the observed activities of particular vehicles and pedestrians match any of the pre-defined suspect behaviour criteria programmed into the system. 
 In addition, the system uses computer-controlled Pan Tilt Zoom (PTZ) cameras to obtain close-up video recordings of any vehicles and pedestrians at the scene.
 
-Although the above proposals are useful for vehicle detection to detect the suspect vehicle, we focus on the detection of suspect vehicles with fake license plate. 
+Although the above proposals are useful for vehicle detection to detect the suspect vehicle, we focus on the detection of suspect vehicles with forged license plate. 
 Therefore, we review studies about reputation algorithm and association analysis concept which we will discuss in the next subsection.
 
 \subsection{Reputation Algorithm}
@@ -356,10 +389,10 @@ To analyze system performance, there are four factors for analysis as follows:
 3) False positive (FP) is the number of the normal vehicles that are analyzed as the criminal and suspect vehicles. 
 4) False negative (FN) is the number of the criminal and suspect vehicles that are analyzed as the normal vehicles. 
 Such factors can be calculated by using this formula:\\
-$$ \text{TP Rate} =  \frac{\text{NofCSVDetectedAsCSV}}{\text{TofCSV}} $$\\
-$$ \text{FN Rate} =  \frac{\text{NofCSVDetectedAsNV}}{\text{TofCSV}} $$\\
-$$ \text{TN Rate} =  \frac{\text{NofNVDetectedAsNV}}{\text{TofNV}} $$\\ 
-$$ \text{FP Rate} =  \frac{\text{NofNVDetectedAsCSV}}{\text{TofNV}} $$\\
+$$ \text{TP Rate} =  \frac{\text{TrueCSV}}{\text{TofCSV}} $$\\
+$$ \text{FN Rate} =  \frac{\text{FalseCSV}}{\text{TofCSV}} $$\\
+$$ \text{TN Rate} =  \frac{\text{TrueNV}}{\text{TofNV}} $$\\ 
+$$ \text{FP Rate} =  \frac{\text{FalseNV}}{\text{TofNV}} $$\\
 $$ \text{Detection Accurate Rate} =  \frac{\text{TP Rate + TN Rate}}{\text{2}} $$
 
 %put this in Notation
@@ -375,12 +408,12 @@ $Variables$ & $Description$\\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
-NofCSVDetectedAsCSV & The number of the criminal and suspect vehicles that \\ & are detected as the criminal and suspect vehicle.\\
+TrueCSV & The number of the criminal and suspect vehicles that \\ & are detected as the criminal and suspect vehicle.\\
 TofCSV & The total of all the criminal and suspect vehicles.\\
-NofCSVDetectedAsNV & The number of the criminal and suspect vehicles that \\ & are detected as the normal vehicle.\\
-NofNVDetectedAsNV & The number of the normal vehicles that are detected \\ & as the normal vehicle.\\
+FalseCSV & The number of the criminal and suspect vehicles that \\ & are detected as the normal vehicle.\\
+TrueNV & The number of the normal vehicles that are detected \\ & as the normal vehicle.\\
 TofNV & The total of all the normal vehicles.\\
-NofNVDetectedAsCSV & The number of the normal vehicles that are detected \\ & as the criminal and suspect vehicle.\\
+FalseNV & The number of the normal vehicles that are detected \\ & as the criminal and suspect vehicle.\\
 \hline
 \end{tabular}
 \end{center}
@@ -456,45 +489,36 @@ In addition, we intend to explore the behavior of criminal vehicles crossing the
 %
 \begin{thebibliography}{15}
 %
+\bibitem{ShengITS}
+H. Sheng, C. Li, Q. Wen, and Z. Xiong: Real-time anti-interference location of vehicle license plates using high-definition video. Intelligent Transportation Systems Magazine, IEEE, vol. 1, no. 4, pp. 17-23 (2009)
+
+\bibitem{AshtariITS}
+A. Ashtari, M. Nordin, and M. Fathy: An iranian license plate recognition system based on color features. Intelligent Transportation Systems, IEEE Transactions on, vol. 15, no. 4, pp. 1690-1705 (2014)
 
 \bibitem{ZezhiChen}
-Z. Chen, N. Pears, M. Freeman, and J. Austin: A gaussian mixturemodel and support vector machine approach to vehicle type and colour classification, Intelligent Transport Systems, IET, vol. 8, no. 2, pp. 135-144, March 2014.
+Z. Chen, N. Pears, M. Freeman, and J. Austin: A gaussian mixturemodel and support vector machine approach to vehicle type and colour classification. Intelligent Transport Systems, IET, vol. 8, no. 2, pp. 135-144 (2014)
 
 \bibitem{Friedman}
-N. Friedman and S. Russell: Image segmentation in video sequences: A probabilistic approach, in Proceedings of the Thirteenth Conference on Uncertainty in Artificial Intelligence, ser. UAI'97. San Francisco, CA, USA: Morgan Kaufmann Publishers Inc., 1997, pp. 175-181. [Online]. Available: http://dl.acm.org/citation.cfm?id=2074226.2074247
+N. Friedman and S. Russell: Image segmentation in video sequences: A probabilistic approach. In: Proceedings of the Thirteenth Conference on Uncertainty in Artificial Intelligence, ser. UAI'97. San Francisco, CA, USA: Morgan Kaufmann Publishers Inc. pp. 175-181 (1997)
 
 \bibitem{Stauffer}
-C. Stauffer and W. Grimson: Learning patterns of activity using real-time tracking, Pattern Analysis and Machine Intelligence, IEEE Transactions on, vol. 22, no. 8, pp. 747-757, Aug 2000.
+C. Stauffer and W. Grimson: Learning patterns of activity using real-time tracking. Pattern Analysis and Machine Intelligence, IEEE Transactions on, vol. 22, no. 8, pp. 747-757 (2000)
 
 \bibitem{Hsieh}
-J.-W. Hsieh, L.-C. Chen, and D.-Y. Chen: Symmetrical surf and its applications to vehicle detection and vehicle make and model recognition, Intelligent Transportation Systems, IEEE Transactions on,
-vol. 15, no. 1, pp. 6-20, Feb 2014.
-
-\bibitem{kaza:suspectVehicle}
-S. Kaza and H. Chen: Suspect vehicle identification for border safety, in Intelligence and Security Informatics, ser. Studies in Computational Intelligence, H. Chen and C. Yang, Eds. Springer Berlin Heidelberg, 2008, vol. 135, pp. 305-318. [Online]. Available: http://dx.doi.org/10.1007/978-3-540-69209-6\_16
-
-\bibitem{kaza} S. Kaza, T.Wang, H. Gowda, and H. Chen: Target vehicle identification for border safety using mutual information, in Intelligent Transportation Systems, 2005. Proceedings. 2005 IEEE, Sept 2005, pp. 1141-1146.
-
-\bibitem{Umedu}
-T. Umedu, K. Isu, T. Higashinoz, and C.-K. Toh: An intervehicular-communication protocol for distributed detection of dangerous vehicles, Vehicular Technology, IEEE Transactions on, vol. 59, no. 2, pp. 627-637, Feb 2010.
-
-\bibitem{kaza:TopologicalAnalysis}
-S. Kaza, J. Xu, B. Marshall, and H. Chen: Topological analysis of criminal activity networks: Enhancing transportation security, Intelligent Transportation Systems, IEEE Transactions on, vol. 10, no. 1, pp. 83-91, March 2009.
-
-\bibitem{Thiel}
-G. Thiel: Automatic cctv surveillance-towards the virtual guard, Aerospace and Electronic Systems Magazine, IEEE, vol. 15, no. 7, pp. 3-9, Jul 2000.
+J.-W. Hsieh, L.-C. Chen, and D.-Y. Chen: Symmetrical surf and its applications to vehicle detection and vehicle make and model recognition. Intelligent Transportation Systems, IEEE Transactions on,
+vol. 15, no. 1, pp. 6-20 (2014)
 
 \bibitem{QinLi}
-Q. Li, A. Malip, K. Martin, S.-L. Ng, and J. Zhang: A reputation-based announcement scheme for vanets, Vehicular Technology, IEEE Transactions on, vol. 61, no. 9, pp. 4095-4108, Nov 2012.
+Q. Li, A. Malip, K. Martin, S.-L. Ng, and J. Zhang: A reputation-based announcement scheme for vanets. Vehicular Technology, IEEE Transactions on, vol. 61, no. 9, pp. 4095-4108 (2012)
 
 \bibitem{Dhurandher}
-S. Dhurandher, M. Obaidat, A. Jaiswal, A. Tiwari, and A. Tyagi: Vehicular security through reputation and plausibility checks, Systems Journal, IEEE, vol. 8, no. 2, pp. 384-394, June 2014.
+S. Dhurandher, M. Obaidat, A. Jaiswal, A. Tiwari, and A. Tyagi: Vehicular security through reputation and plausibility checks. Systems Journal, IEEE, vol. 8, no. 2, pp. 384-394 (2014)
 
 \bibitem{Ayday}
-E. Ayday and F. Fekri: An iterative algorithm for trust management and adversary detection for delay-tolerant networks, Mobile Computing, IEEE Transactions on, vol. 11, no. 9, pp. 1514-1531, Sept 2012.
+E. Ayday and F. Fekri: An iterative algorithm for trust management and adversary detection for delay-tolerant networks. Mobile Computing, IEEE Transactions on, vol. 11, no. 9, pp. 1514-1531 (2012)
 
 \bibitem{Xie}
-M. Xie and H. Wang: A collaboration-based autonomous reputation system for email services, in INFOCOM, 2010 Proceedings IEEE, March 2010, pp. 1-9.
+M. Xie and H. Wang: A collaboration-based autonomous reputation system for email services. in INFOCOM, 2010 Proceedings IEEE, pp. 1-9 (2010)
 %\bibitem{DBLP:taylor} Bradley Taylor: Sender reputation in a large webmail service, in CEAS, 2006.
 
 %\bibitem{Wang:ARTSense}
@@ -502,39 +526,52 @@ M. Xie and H. Wang: A collaboration-based autonomous reputation system for email
 %\bibitem{lazzari} Lazzari, L. and Mari, M. and Poggi, A.: A collaborative and multi-agent system for e-mail filtering and classification, in Collaborative Computing: Networking, Applications and Worksharing, 2005 International Conference on, 2005, pp. 8 pp.-
 
 \bibitem{Chirita:Mailrank} 
-P.-A. Chirita, J. Diederich, and W. Nejdl: Mailrank: Using ranking for spam detection, in Proceedings of the 14th ACM International Conference on Information and Knowledge Management, ser. CIKM '05. New York, NY, USA: ACM, 2005, pp. 373-380. [Online]. Available: http://doi.acm.org/10.1145/1099554.1099671
+P.-A. Chirita, J. Diederich, and W. Nejdl: Mailrank: Using ranking for spam detection. In: Proceedings of the 14th ACM International Conference on Information and Knowledge Management, ser. CIKM '05. New York, NY, USA: ACM, pp. 373-380 (2005)
 
 \bibitem{West:Spam} 
-A. G. West, A. J. Aviv, J. Chang, and I. Lee: Spam mitigation using spatio-temporal reputations from blacklist history, in Proceedings of the 26th Annual Computer Security Applications Conference, ser. ACSAC '10. New York, NY, USA: ACM, 2010, pp. 161-170. [Online]. Available: http://doi.acm.org/10.1145/1920261.1920287
+A. G. West, A. J. Aviv, J. Chang, and I. Lee: Spam mitigation using spatio-temporal reputations from blacklist history. In: Proceedings of the 26th Annual Computer Security Applications Conference, ser. ACSAC '10. New York, NY, USA: ACM, pp. 161-170 (2010)
 
 \bibitem{Zhang:Ipgrouprep}
-H. Zhang, H. Duan, W. Liu, and J. Wu: Ipgrouprep: A novel reputation based system for anti-spam, in Ubiquitous, Autonomic and Trusted Computing, 2009. UIC-ATC '09. Symposia and Workshops on, July 2009, pp. 513-518.
+H. Zhang, H. Duan, W. Liu, and J. Wu: Ipgrouprep: A novel reputation based system for anti-spam. in Ubiquitous, Autonomic and Trusted Computing, UIC-ATC '09. Symposia and Workshops on, pp. 513-518 (2009)
 
 \bibitem{altman} 
-A. Altman and M. Tennenholtz: Ranking systems: The pagerank axioms, in Proceedings of the 6th ACM Conference on Electronic Commerce, ser. EC '05. New York, NY, USA: ACM, 2005, pp. 1-8.
-[Online]. Available: http://doi.acm.org/10.1145/1064009.1064010
+A. Altman and M. Tennenholtz: Ranking systems: The pagerank axioms. In: Proceedings of the 6th ACM Conference on Electronic Commerce, ser. EC '05. New York, NY, USA: ACM, pp. 1-8 (2005)
 
 %\bibitem{ding} Qing Ding and Xi Li and Ming Jiang and Xuehai Zhou: Reputation management in vehicular ad hoc networks, in Multimedia Technology (ICMT), 2010 International Conference on, Oct 2010, pp. 1-5.
 
 %\bibitem{park} Soyoung Park and Aslam, B. and Zou, C.: Long-term reputation system for vehicular networking based on vehicle's daily commute routine, in Consumer Communications and Networking Conference (CCNC), 2011 IEEE, Jan 2011, pp. 436-441.
 
-\bibitem{page} Page, L. and Brin, S. and Motwani, R. and Winograd, T.: The pagerank citation ranking: Bringing order to the web, in Proceedings of the 7th International World Wide Web Conference, Brisbane, Australia, 1998, pp. 161-172. [Online]. Available: http://citeseer.nj.nec.com/page98pagerank.html
+\bibitem{page} Page, L. and Brin, S. and Motwani, R. and Winograd, T.: The pagerank citation ranking: Bringing order to the web. In: Proceedings of the 7th International World Wide Web Conference, Brisbane, Australia, pp. 161-172 (1998)
 
 \bibitem{WangLin}
-Y. Wang and K.-J. Lin: Reputation-oriented trustworthy computing in e-commerce environments, Internet Computing, IEEE, vol. 12, no. 4, pp. 55-59, July 2008.
+Y. Wang and K.-J. Lin: Reputation-oriented trustworthy computing in e-commerce environments. Internet Computing, IEEE, vol. 12, no. 4, pp. 55-59 (2008)
 %\bibitem{resnick} Resnick, Paul and Zeckhauser, Richard: Trust among strangers in Internet transactions: Empirical analysis of eBay\'s reputation system, in The Economics of the Internet and E-Commerce, ser. Advances in Applied Microeconomics, M. R. Baye, Ed. Elsevier Science, 2002, vol. 11, pp. 127-157. [Online]. Available: http://www.si.umich.edu/ presnick/papers/ebayNBER/index.html
 
-\bibitem{chruch} Church, Kenneth Ward and Hanks, Patrick: Word association norms, mutual information, and lexicography, Comput. Linguist., vol. 16, no. 1, pp. 22-29, Mar. 1990. [Online]. Available: http://dl.acm.org/citation.cfm?id=89086.89095
+\bibitem{kaza:suspectVehicle}
+S. Kaza and H. Chen: Suspect vehicle identification for border safety. in Intelligence and Security Informatics, ser. Studies in Computational Intelligence, H. Chen and C. Yang (eds). vol. 135, pp. 305-318. Springer Berlin Heidelberg (2008) 
 
-\bibitem{romashchenko} Romashchenko, A.: Extracting the mutual information for a triple of binary strings, in Computational Complexity, 2003. Proceedings. 18th IEEE Annual Conference on, July 2003, pp. 221-229.
+\bibitem{kaza} S. Kaza, T.Wang, H. Gowda, and H. Chen: Target vehicle identification for border safety using mutual information. in Intelligent Transportation Systems. Proceedings. 2005 IEEE, pp. 1141-1146 (2005)
+
+\bibitem{Umedu}
+T. Umedu, K. Isu, T. Higashinoz, and C.-K. Toh: An intervehicular-communication protocol for distributed detection of dangerous vehicles. Vehicular Technology, IEEE Transactions on, vol. 59, no. 2, pp. 627-637 (2010)
+
+\bibitem{kaza:TopologicalAnalysis}
+S. Kaza, J. Xu, B. Marshall, and H. Chen: Topological analysis of criminal activity networks: Enhancing transportation security. Intelligent Transportation Systems, IEEE Transactions on, vol. 10, no. 1, pp. 83-91 (2009)
+
+\bibitem{Thiel}
+G. Thiel: Automatic cctv surveillance-towards the virtual guard. Aerospace and Electronic Systems Magazine, IEEE, vol. 15, no. 7, pp. 3-9 (2000)
+
+\bibitem{chruch} Church, Kenneth Ward and Hanks, Patrick: Word association norms, mutual information, and lexicography. Comput. Linguist., vol. 16, no. 1, pp. 22-29 (1990)
+
+\bibitem{romashchenko} Romashchenko, A.: Extracting the mutual information for a triple of binary strings. in Computational Complexity, 2003. Proceedings. 18th IEEE Annual Conference on, pp. 221-229 (2003)
 
 \bibitem{Exarchos}
-T. Exarchos, C. Papaloukas, D. Fotiadis, and L. Michalis: An association rule mining-based methodology for automated detection of ischemic ecg beats, Biomedical Engineering, IEEE Transactions on, vol. 53, no. 8, pp. 1531-1540, Aug 2006.
+T. Exarchos, C. Papaloukas, D. Fotiadis, and L. Michalis: An association rule mining-based methodology for automated detection of ischemic ecg beats. Biomedical Engineering, IEEE Transactions on, vol. 53, no. 8, pp. 1531-1540 (2006)
 %\bibitem{li} Li Xiang-wei and Zhao Shuang-ping: A novel web authoritative page mining algorithm based on association analysis, in Knowledge Acquisition and Modeling (KAM), 2011 Fourth International Symposium on, Oct 2011, pp. 136-138.
 
-\bibitem{zhuang} Ziyun Zhuang and Bo Zhang: Application of association analysis in digital content industry, in Computational Intelligence and Design (ISCID), 2012 Fifth International Symposium on, vol. 1, Oct 2012, pp. 18-21.
+\bibitem{zhuang} Ziyun Zhuang and Bo Zhang: Application of association analysis in digital content industry. in Computational Intelligence and Design (ISCID), 2012 Fifth International Symposium on, vol. 1, pp. 18-21 (2012)
 
-\bibitem{miao} Miao, Gengxin and Guan, Ziyu and Moser, Louise E. and Yan, Xifeng and Tao, Shu and Anerousis, Nikos and Sun, Jimeng: Latent association analysis of document pairs, in Proceedings of the 18th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, ser. KDD '12. New York, NY, USA: ACM, 2012, pp. 1415-1423. [Online]. Available: http://doi.acm.org/10.1145/2339530.2339752
+\bibitem{miao} Miao, Gengxin and Guan, Ziyu and Moser, Louise E. and Yan, Xifeng and Tao, Shu and Anerousis, Nikos and Sun, Jimeng: Latent association analysis of document pairs. In: Proceedings of the 18th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, ser. KDD '12. New York, NY, USA: ACM, pp. 1415-1423 (2012)
 
 \end{thebibliography}
 %
