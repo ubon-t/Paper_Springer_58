@@ -5,6 +5,8 @@
 \usepackage{llncsdoc}
 \usepackage{graphicx}
 \usepackage[cmex10]{amsmath}
+\usepackage{fancyvrb}
+\usepackage{bera}
 
 %
 \begin{document}
@@ -123,19 +125,19 @@ Basically, the license plate is a unique ID for a vehicle that can be used for a
 %%
 In addition, license plate recognition (LPR) has been widely applied in numerous applications.
 %
-For example, the LPR system can be used in smart border safety to monitor vehicles entering and leaving the country, recording license plates with a location and date and time of entry using license plate readers.
+For example, the LPR system can be used in smart border safety \cite{kaza} to monitor vehicles entering and leaving the country, recording license plates with a location and date and time of entry using license plate readers.
 %% 
-These records are used to match the vehicle blacklist to detect the criminal/suspect vehicles crossing the border.
+These records are used to match the vehicle watch lists to detect the target vehicles crossing the border.
 %%
-In addition to that, LPR can be used in smart parking areas or smart toll stations to help facilitate the vehicles bearing authorized license plates that the gates is opened when the vehicles have authorization.
+In addition to that, LPR can be used in smart parking areas or smart toll stations to help facilitate the vehicles bearing authorized license plates that the gates is opened when the vehicles have authorization \cite{AshtariITS}.
 %%
-The intellectualized traffic management and traffic safety enforcement also use LPR to implementing the processes.
+The intellectualized traffic management \cite{ShengITS} and traffic safety enforcement \cite{Bailey} also use LPR to implementing the processes.
 %%
-Furthermore, the security control of restricted areas can
+Furthermore, the security control of restricted areas \cite{AdorniLPR} can
 improve the intruder prevention capability by using LPR to detect license plates authorization.
 %%
 
-For the vehicle recognition method, there are several methods such as vehicle type recognition,  vehicle color recognition,  vehicle brand recognition, and vehicle model recognition to help facilitate the vehicle detection process \cite{ShengITS}, \cite{AshtariITS}, \cite{ZezhiChen}, \cite{Friedman}, \cite{Stauffer}, \cite{Hsieh}.
+For the vehicle recognition method, there are several methods such as vehicle type recognition,  vehicle color recognition,  vehicle brand recognition, and vehicle model recognition to help facilitate the vehicle detection process \cite{kaza}, \cite{AshtariITS}, \cite{ShengITS}, \cite{Bailey}, \cite{AdorniLPR}, \cite{ZezhiChen}, \cite{Friedman}, \cite{Stauffer}, \cite{Hsieh}.
 %5
 However, the suspect vehicle detection by only vehicle recognition previously mentioned to detect the criminal/suspect vehicles may be insufficient.
 %
@@ -168,11 +170,11 @@ The aim of this work is to improve the detection capability of the suspect vehic
 In the next section, we discuss background information and previous studies
 using reputation algorithm and association analysis concept. 
 %
-Section III explains the research testbed and research design. 
+Section 3 explains the research testbed and research design. 
 %
-Experimental results are shown in Section IV, and discussed in Section V. 
+Experimental results are shown in Section 4, and discussed in Section 5. 
 %
-Section VI concludes and presents future directions.
+Section 6 concludes and presents future directions.
 %
 %Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi}, \cite{Dhurandher}, \cite{Ayday}, filtering email spam \cite{Xie}, \cite{Chirita:Mailrank}, \cite{West:Spam}, \cite{Zhang:Ipgrouprep}, ecommerce \cite{altman}, \cite{page}, \cite{WangLin}, etc.
 %In addition, vehicle detection by only data classification process may be insufficient. Therefore, the association analysis process should be used together to increase the detection accuracy.
@@ -289,20 +291,53 @@ Number of criminal vehicles crossing the checkpoint in three months& 513\\
 \label{fig:diagram}
 \end{figure*}
 
-Fig. \ref{fig:diagram} shows the research design and the evolution process of criminal or suspect vehicle detection at the checkpoint. This diagram is divided into three sections: 
+Figure \ref{fig:diagram} shows the research design and the evolution process of criminal or suspect vehicle detection at the checkpoint. This diagram is divided into three sections: 
 1) Input section consists of the real time checkpoint crossing data set in three months, the one year records of checkpoint crossing data set, the blacklist of criminal vehicle data set, and criminal activity data set. 
-2) Processing section consists of matching score module to detect the criminal vehicles that crossing the checkpoint and vehicle association with criminal activity score module to detect the suspect vehicles that crossing the checkpoint. In this research, we focus on the processing section shown in Fig.\ref{fig:diagram} which is explained in the following sub-sections. 
+2) Processing section consists of matching score module to detect the criminal vehicles that crossing the checkpoint and vehicle association with criminal activity score module to detect the suspect vehicles that crossing the checkpoint. In this research, we focus on the processing section shown in Figure \ref{fig:diagram} which is explained in the following sub-sections. 
 3) Output section serves as the alert of the criminal vehicle or suspect vehicle if the system detects the criminal vehicles or suspect vehicles that crossing the checkpoint. 
 
 \subsubsection{Matching Score Module}
 %
-\begin{figure}
-\vspace{1.8mm}
-\centering
-\includegraphics[width=1\textwidth]{images/MatchingAlgorithm.jpg}
+%
+\begin{figure}[h]
+\hrule
+{\strut\footnotesize \bf Algorithm 1: MatchingScore} 
+\hrule
+\footnotesize 
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+for i := 1 to n step 1 do 
+   if(VCDataLicenseplate = CVDataLicenseplate$_{i}$) then 
+       Score = Score + (1 * WLicenseplate);
+   end if
+   if(VCDataColor = CVDataColor$_{i}$) then 
+       Score = Score + (1 * WColor);
+   end if
+   if(VCDataBrand = CVDataBrand$_{i}$) then 
+       Score = Score + (1 * WBrand);
+   end if
+   if(VCDataType = CVDataType$_{i}$) then 
+       Score = Score + (1 * WType);    
+   end if
+   if(Score > HScore) then
+       call AlertModule;
+   else if (Score > LScore) then
+       call CriminalActivityScore;
+   end if
+end for
+\end{Verbatim}
+\normalsize
+\hrule
 \caption{Matching score module algorithm.}
 \label{fig:matchingAlgo}
 \end{figure}
+
+%\begin{figure}
+%\vspace{1.8mm}
+%\centering
+%\includegraphics[width=1\textwidth]{images/MatchingAlgorithm.jpg}
+%\caption{Matching score module algorithm.}
+%\label{fig:matchingAlgo}
+%\end{figure}
 %
 Matching Score Module is criminal vehicle detection process. 
 First, we define attributes for classification and assign weight to each of the attributes. 
@@ -313,6 +348,11 @@ Subsequently, it computes the sum of all of the weighted attribute.
 The weighted sum is a single number to compare with the threshold.  
 If weighted sum is greater than the high score threshold, referred to as High Matching Score, vehicle crossing the checkpoint will be considered as criminal vehicle and will be processed in the Alert Module. 
 If weighted sum is less than the high score threshold and also greater than the low score threshold, referred to as Middle Matching Score, vehicle crossing the checkpoint will be considered as target vehicle and will be processed in the Vehicle Association with Criminal Activity Score Module. 
+
+High Matching Score is calculated by the following attribute-matching condition: at least license plate matches with the blacklist.
+Middle Matching Score is calculated by the following attribute-matching condition: vehicle color and vehicle brand and vehicle type match with the blacklist. 
+Algorithm of Matching Score Module is shown in Figure \ref{fig:matchingAlgo}. Table \ref{table_variableMatching} summarizes the notation for Matching Score Module.
+
 %put these in Notation table
 \begin{table}
 \caption{Variable Description for Matching Score Module}
@@ -345,10 +385,48 @@ LScore & The low score threshold.\\
 \end{tabular}
 \end{center}
 \end{table}
+%
 
-High Matching Score is calculated by the following attribute-matching condition: at least license plate matches with the blacklist.
-Middle Matching Score is calculated by the following attribute-matching condition: vehicle color and vehicle brand and vehicle type match with the blacklist. 
-Algorithm of Matching Score Module is shown in Fig. \ref{fig:matchingAlgo}. Table \ref{table_variableMatching} summarizes the notation for Matching Score Module.
+\begin{figure}[h]
+\hrule
+{\strut\footnotesize \bf Algorithm 2: VehicleAssocCriminalActScore} 
+\hrule
+\footnotesize 
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`_=8}]
+ActivityLoop = 0;
+for x := 1 to n step 1 do 
+   for i := 1 to m step 1 do
+      if(TVData = VCHData$_{i}$) then 
+         if(ActivityLoop = 0) then
+            NTVLog = NTVLog + 1;
+         end if
+         if(CAChcekpoint$_{x}$ = VCHCheckpoint$_{i}$) & (VCHTime$_{x}$ < mxTimeRang) & 
+         (VCHTime$_{x}$ > mnTimeRang) then
+            NData = NData + 1;
+         else
+            NData = NData + 0;
+         end if
+      end if      
+   end for          
+   ActivityLoop = 1;    
+end for     
+if((NData / NTVLog) > HScore) then
+   call AlertModule;    
+end if      	
+\end{Verbatim}
+\normalsize
+\hrule
+\caption{Vehicles association with criminal activity score module algorithm.}
+\label{fig:activityAlgo}
+\end{figure}
+
+%\begin{figure}
+%\vspace{1.8mm}
+%\centering
+%\includegraphics[width=1\textwidth]{images/activityAlgorithm2.jpg}
+%\caption{Vehicles association with criminal activity score module algorithm.}
+%\label{fig:activityAlgo}
+%\end{figure}
 
 \subsubsection{Vehicle Association with Criminal Activity Score Module}
 This module is a suspect vehicle detection process using association analysis concept to identify the vehicles that are potentially involved in criminal activities. 
@@ -365,15 +443,7 @@ $\nu$ = number of involvement in criminal activities of target vehicle.\mbox{ }\
 $\varsigma$ = total of the 1 year checkpoint crossing records of target vehicle.\\
 
 If the vehicles with higher ratio than the threshold, they are considered potential suspect vehicles, and then the vehicle data will be processed in the Alert Module. 
-Algorithm of Vehicle association with Criminal Activity Score Module is shown in Fig. \ref{fig:activityAlgo}. Table \ref{table_variableActivity} summarizes the notation for Vehicle Association with Criminal Activity Score Module.
-
-\begin{figure}
-%\vspace{1.8mm}
-\centering
-\includegraphics[width=1\textwidth]{images/activityAlgorithm2.jpg}
-\caption{Vehicles association with criminal activity score module algorithm.}
-\label{fig:activityAlgo}
-\end{figure}
+Algorithm of Vehicle association with Criminal Activity Score Module is shown in Figure \ref{fig:activityAlgo}. Table \ref{table_variableActivity} summarizes the notation for Vehicle Association with Criminal Activity Score Module.
 
 %put these in Notation table
 \begin{table}
@@ -417,6 +487,11 @@ $$ \text{FN Rate} =  \frac{\text{FalseCSV}}{\text{TofCSV}} $$\\
 $$ \text{TN Rate} =  \frac{\text{TrueNV}}{\text{TofNV}} $$\\ 
 $$ \text{FP Rate} =  \frac{\text{FalseNV}}{\text{TofNV}} $$\\
 $$ \text{Detection Accurate Rate} =  \frac{\text{TP Rate + TN Rate}}{\text{2}} $$
+
+Table \ref{table_variableSysPerf} summarizes the notation for The System Performance Analysis.
+The results obtained from the vehicle detection tests in three months is shown in Table \ref{table_vehiclesDetected}.
+As a results, this novel process can detect 147 suspect vehicles more than the traditional process or equal to 138.68\% higher.
+Figure \ref{fig:graphresults} and Table \ref{table_results} show the results of the system performance analysis of the novel process that have the criminal or suspect vehicle detection rate is equal to 49.32\% and detection accurate rate is equal to 74.09\% which is an acceptable accurate rate. These results show that this technique can improve the detection capability of the suspect vehicle detection process.
 
 %put this in Notation
 \begin{table}
@@ -486,15 +561,11 @@ Detection Accurate Rate & 60.33\% & 74.09\%\\
 \begin{figure}
 %\vspace{1.8mm}
 \centering
-\includegraphics[width=0.9\textwidth]{images/results.pdf}
+\includegraphics[width=0.85\textwidth]{images/results.pdf}
 \caption{The results of the system performance analysis.}
 \label{fig:graphresults}
 \end{figure}
-
-Table \ref{table_variableSysPerf} summarizes the notation for The System Performance Analysis.
-The results obtained from the vehicle detection tests in three months is shown in Table \ref{table_vehiclesDetected}.
-As a results, this novel process can detect 147 suspect vehicles more than the traditional process or equal to 138.68\% higher.
-Fig. \ref{fig:graphresults} and Table \ref{table_results} show the results of the system performance analysis of the novel process that have the criminal or suspect vehicle detection rate is equal to 49.32\% and detection accurate rate is equal to 74.09\% which is an acceptable accurate rate. These results show that this technique can improve the detection capability of the suspect vehicle detection process.
+%
 
 \section{Discussion}
 The novel process still gain higher FP rate than the traditional process because using only color, brand and type of vehicles matching the blacklist can not separate the normal vehicles out of the target vehicles. However, we intend to improve the normal vehicle separation process by using the target vehicle data from Matching Score Module matching the vehicle database of Department of Land Transport (DLT), Thailand. If the target vehicle data do not match the DLT database, it is considered as the illegal vehicles and processed in the Vehicle Association with Criminal Activity Score Module. In addition, the use of the DLT database can improve the FN rate.
@@ -512,11 +583,22 @@ In addition, we intend to explore the behavior of criminal vehicles crossing the
 %
 \begin{thebibliography}{15}
 %
-\bibitem{ShengITS}
-H. Sheng, C. Li, Q. Wen, and Z. Xiong: Real-time anti-interference location of vehicle license plates using high-definition video. Intelligent Transportation Systems Magazine, IEEE, vol. 1, no. 4, pp. 17-23 (2009)
+
+\bibitem{Ronak} Ronak P Patel, Narendra M Patel, Keyur Brahmbhatt: Automatic Licenses Plate Recognition. In: International Journal of Computer Science and Mobile Computing Vol.2 Issue. 4, pg. 285-294 (2013)
+
+\bibitem{kaza} S. Kaza, T.Wang, H. Gowda, and H. Chen: Target vehicle identification for border safety using mutual information. in Intelligent Transportation Systems. Proceedings. 2005 IEEE, pp. 1141-1146 (2005)
 
 \bibitem{AshtariITS}
 A. Ashtari, M. Nordin, and M. Fathy: An iranian license plate recognition system based on color features. Intelligent Transportation Systems, IEEE Transactions on, vol. 15, no. 4, pp. 1690-1705 (2014)
+
+\bibitem{ShengITS}
+H. Sheng, C. Li, Q. Wen, and Z. Xiong: Real-time anti-interference location of vehicle license plates using high-definition video. Intelligent Transportation Systems Magazine, IEEE, vol. 1, no. 4, pp. 17-23 (2009)
+
+\bibitem{Bailey}
+D. Bailey, D. Irecki, B. Lim, and L. Yang: Test bed for number plate recognition applications, In: Electronic Design, Test and Applications, 2002. Proceedings. The First IEEE International Workshop on, pp. 501-503 (2002)
+
+\bibitem{AdorniLPR}
+G. Adorni, F. Bergenti, S. Cagnoni, and M. Mordonini: License-plate recognition for restricted-access area control, in Multimedia Video-Based Surveillance Systems, ser. The Springer International Series in Engineering and Computer Science, G. Foresti, P. Mhnen, and C. Regazzoni (eds). Springer US, vol. 573, pp. 260-271 (2000)
 
 \bibitem{ZezhiChen}
 Z. Chen, N. Pears, M. Freeman, and J. Austin: A gaussian mixturemodel and support vector machine approach to vehicle type and colour classification. Intelligent Transport Systems, IET, vol. 8, no. 2, pp. 135-144 (2014)
@@ -573,8 +655,6 @@ Y. Wang and K.-J. Lin: Reputation-oriented trustworthy computing in e-commerce e
 \bibitem{kaza:suspectVehicle}
 S. Kaza and H. Chen: Suspect vehicle identification for border safety. in Intelligence and Security Informatics, ser. Studies in Computational Intelligence, H. Chen and C. Yang (eds). vol. 135, pp. 305-318. Springer Berlin Heidelberg (2008) 
 
-\bibitem{kaza} S. Kaza, T.Wang, H. Gowda, and H. Chen: Target vehicle identification for border safety using mutual information. in Intelligent Transportation Systems. Proceedings. 2005 IEEE, pp. 1141-1146 (2005)
-
 \bibitem{Umedu}
 T. Umedu, K. Isu, T. Higashinoz, and C.-K. Toh: An intervehicular-communication protocol for distributed detection of dangerous vehicles. Vehicular Technology, IEEE Transactions on, vol. 59, no. 2, pp. 627-637 (2010)
 
@@ -596,7 +676,6 @@ T. Exarchos, C. Papaloukas, D. Fotiadis, and L. Michalis: An association rule mi
 
 \bibitem{miao} Miao, Gengxin and Guan, Ziyu and Moser, Louise E. and Yan, Xifeng and Tao, Shu and Anerousis, Nikos and Sun, Jimeng: Latent association analysis of document pairs. In: Proceedings of the 18th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, ser. KDD '12. New York, NY, USA: ACM, pp. 1415-1423 (2012)
 
-\bibitem{Ronak} Ronak P Patel, Narendra M Patel, Keyur Brahmbhatt: Automatic Licenses Plate Recognition. In: International Journal of Computer Science and Mobile Computing Vol.2 Issue. 4, April- 2013, pg. 285-294
 
 
 
