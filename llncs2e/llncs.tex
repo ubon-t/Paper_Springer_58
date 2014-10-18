@@ -136,28 +136,43 @@ improve the intruder prevention capability by using LPR to detect license plates
 %%
 
 For the vehicle recognition method, there are several methods such as vehicle type recognition,  vehicle color recognition,  vehicle brand recognition, and vehicle model recognition to help facilitate the vehicle detection process \cite{ShengITS}, \cite{AshtariITS}, \cite{ZezhiChen}, \cite{Friedman}, \cite{Stauffer}, \cite{Hsieh}.
+%5
 However, the suspect vehicle detection by only vehicle recognition previously mentioned to detect the criminal/suspect vehicles may be insufficient.
-Because the suspect vehicle detection system normally compares the list of blacklisted license plates in the checkpoint database and vehicle license plates gathering from LPR method to identify the criminal or suspect vehicles.
+%
+Normally, the suspect vehicle detection system compares the list of blacklisted license plates from the checkpoint database and vehicle license plates gathering from LPR method to identify the criminal/suspect vehicles.
+%
 This traditional process of comparing those license plates utilizing the matching of alphabet character is not effective.
-The system unable to detect the criminal/suspect vehicles with forged license plate if the characters of the licence plate do not totoally match with the blacklisted license plates.
+%
+The system unable to detect the criminal/suspect vehicles with forged license plate if the characters of the license plate do not totally match with the blacklisted license plates.
 
-In this paper, we propose the approach includes two techniques to detect the criminal or suspect vehicles that crossing the checkpoint.
+In this paper, we propose an approach includes two techniques to detect the criminal/suspect vehicles that crossing the checkpoint.
+%
 In the first technique, we use reputation algorithm to detect the criminal/suspect vehicles that crossing the checkpoint which license plates from ALPR match with the blacklist in the checkpoint database.
-Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi}, \cite{Dhurandher}, \cite{Ayday}, filtering email spam \cite{Xie}, \cite{Chirita:Mailrank}, \cite{West:Spam}, \cite{Zhang:Ipgrouprep}, ecommerce \cite{altman}, \cite{page}, \cite{WangLin}, etc.
+%
+Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi}, \cite{Dhurandher}, \cite{Ayday}, filtering email spam \cite{Xie}, \cite{Chirita:Mailrank}, \cite{West:Spam}, \cite{Zhang:Ipgrouprep}, E-commerce \cite{altman}, \cite{page}, \cite{WangLin}, etc.
+%
 The vehicle detection by only data classification process may be insufficient. Therefore, the association analysis process should be used together to increase the detection accuracy.
 %
 In the second technique, we use association analysis concept to detect the suspect vehicles which license plates do not match the blacklist.
-However this method uses color, brand and type of vehicles obtained from the vehicle recognition previously mentioned matching the blacklist to identify the vehicles crossing the checkpoint that might relate to the criminal activity records.
+%
+However, this method uses color, brand and type of vehicles obtained from the vehicle recognition previously mentioned matching the blacklist to identify the vehicles crossing the checkpoint that might relate to the criminal activity records.
+%
 We consider the involvement in criminal activities by analyzing the vehicles already crossed the checkpoint near the location, date, and time of the criminal activities records.
+%
 Our two techniques can detect the suspect vehicles with forged license plate by using color, brand and type of the vehicles instead of only the license plate number matching method.
+%
 A blacklist of criminal vehicles and criminal activity recorded obtain from a criminal report database of Defence Technology Institute (DTI), Thailand.
+%
 The aim of this work is to improve the detection capability of the suspect vehicle detection system.
 
 In the next section, we discuss background information and previous studies
-using reputation algorithm and association analysis concept. Section III explains
-the research testbed and research design. Experimental results are shown in
-Section IV, and discussed in Section V. Section VI concludes and presents future
-directions.
+using reputation algorithm and association analysis concept. 
+%
+Section III explains the research testbed and research design. 
+%
+Experimental results are shown in Section IV, and discussed in Section V. 
+%
+Section VI concludes and presents future directions.
 %
 %Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi}, \cite{Dhurandher}, \cite{Ayday}, filtering email spam \cite{Xie}, \cite{Chirita:Mailrank}, \cite{West:Spam}, \cite{Zhang:Ipgrouprep}, ecommerce \cite{altman}, \cite{page}, \cite{WangLin}, etc.
 %In addition, vehicle detection by only data classification process may be insufficient. Therefore, the association analysis process should be used together to increase the detection accuracy.
