@@ -97,7 +97,7 @@
 %
 \begin{abstract}
 %\boldmath
-The suspect vehicle detection system normally compares the list of criminal license plates and vehicle license plates gathering from various sensors in order to identify the criminal or suspect vehicles. 
+The suspect vehicle detection system normally compares the list of criminal license plates and vehicle license plates gathering from various sensors in order to identify the criminal/suspect vehicles. 
 %%
 However, the traditional process of comparing those license plates utilizing the matching of alphabet character is not effective. 
 %%
@@ -137,7 +137,7 @@ Furthermore, the security control of restricted areas \cite{AdorniLPR} can
 improve the intruder prevention capability by using LPR to detect license plates authorization.
 %%
 
-For the vehicle recognition method, there are several methods such as vehicle type recognition,  vehicle color recognition,  vehicle brand recognition, and vehicle model recognition to help facilitate the vehicle detection process \cite{kaza}, \cite{AshtariITS}, \cite{ShengITS}, \cite{Bailey}, \cite{AdorniLPR}, \cite{ZezhiChen}, \cite{Friedman}, \cite{Stauffer}, \cite{Hsieh}.
+For the vehicle recognition method, there are several methods such as vehicle type recognition,  vehicle color recognition,  vehicle brand recognition, and vehicle model recognition to help facilitate the vehicle detection process \cite{kaza,AshtariITS,ShengITS,Bailey,AdorniLPR,ZezhiChen,Friedman,Stauffer,Hsieh}.
 %5
 However, the suspect vehicle detection by only vehicle recognition previously mentioned to detect the criminal/suspect vehicles may be insufficient.
 %
@@ -151,7 +151,7 @@ In this paper, we propose an approach includes two techniques to detect the crim
 %
 In the first technique, we use reputation algorithm to detect the criminal/suspect vehicles that crossing the checkpoint which license plates from ALPR match with the blacklist in the checkpoint database.
 %
-Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi}, \cite{Dhurandher}, \cite{Ayday}, filtering email spam \cite{Xie}, \cite{Chirita:Mailrank}, \cite{West:Spam}, \cite{Zhang:Ipgrouprep}, E-commerce \cite{altman}, \cite{page}, \cite{WangLin}, etc.
+Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi,Dhurandher,Ayday}, filtering email spam \cite{Xie,Chirita:Mailrank,West:Spam,Zhang:Ipgrouprep},E-commerce \cite{altman,page,WangLin}, etc.
 %
 The vehicle detection by only data classification process may be insufficient. Therefore, the association analysis process should be used together to increase the detection accuracy.
 %
@@ -167,7 +167,7 @@ A blacklist of criminal vehicles and criminal activity recorded obtain from a cr
 %
 The aim of this work is to improve the detection capability of the suspect vehicle detection system.
 
-In the next section, we discuss background information and previous studies
+In the next section, we will discuss the background information and previous studies
 using reputation algorithm and association analysis concept. 
 %
 Section 3 explains the research testbed and research design. 
@@ -178,7 +178,7 @@ Section 6 concludes and presents future directions.
 %
 %Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi}, \cite{Dhurandher}, \cite{Ayday}, filtering email spam \cite{Xie}, \cite{Chirita:Mailrank}, \cite{West:Spam}, \cite{Zhang:Ipgrouprep}, ecommerce \cite{altman}, \cite{page}, \cite{WangLin}, etc.
 %In addition, vehicle detection by only data classification process may be insufficient. Therefore, the association analysis process should be used together to increase the detection accuracy.
-%The traditional suspect vehicle detection process of comparing criminal license plates and vehicle license plates utilizing the matching of alphabet character is not effective. If the characters do not match any one character, the system can not detect criminal or suspect vehicles with forged license plate.
+%The traditional suspect vehicle detection process of comparing criminal license plates and vehicle license plates utilizing the matching of alphabet character is not effective. If the characters do not match any one character, the system can not detect criminal/suspect vehicles with forged license plate.
 
 %In this paper, we propose the approach using reputation concept to detect criminal vehicles crossing the checkpoint whose license plates match the blacklist. 
 %In addition, we use association analysis concept to detect the suspect vehicles which license plates do not match the blacklist, however this method uses color, brand and type of vehicles matching the blacklist to identify the vehicles that potentially involve in criminal activity.
@@ -188,59 +188,81 @@ Section 6 concludes and presents future directions.
 %
 \section{Literature Review}
 %
-The literature reviews of related our research is divided into three subsections.
+The literature reviews of related our research are divided into following subsections.
+%
 \subsection{The Vehicle Recognition and Detection}
+%
 There are several research works about efficient vehicle detection and classification. 
-For example, Chen et al. \cite{ZezhiChen} propose two processes to segment moving road vehicles and classify those vehicles in terms of type (car, van and heavy goods vehicle) and dominant colour (black, white, red).
-For the segmentation, they have improved the Gaussian mixture model (GMM) approach proposed by Friedman and Russell \cite{Friedman} and refined for real-time tracking by Stauffer and Grimson \cite{Stauffer} with a multi-dimensional smoothing transform.
+%
+For example, Chen et al. \cite{ZezhiChen} propose two processes to devide moving road vehicles and classify those vehicles in terms of type (car, van and heavy goods vehicle) and dominant colour (black, white, red).
+%
+For the segmentation, they have improved the Gaussian Mixture Model (GMM) approach proposed by Friedman and Russell \cite{Friedman} and refined for real-time tracking by Stauffer and Grimson \cite{Stauffer} with a multi-dimensional smoothing transform.
+%
 For vehicle classification \cite{ZezhiChen}, they use a kernelised support vector machine (SVM) to classify vehicle types and colours.
+%
 The classification process uses size, width, aspect ratio and solidity of the foreground vehicle to recognise vehicle type and uses 8-bin 3D colour histogram as the vector for SVM classification to recognise vehicle colour. 
 %
 Hsieh et al. \cite{Hsieh} propose a new symmetrical Speeded-Up Robust Features (SURF) descriptor applied to vehicle make and model recognition (MMR) system to detect vehicles and recognize their make and model.
 
-In the field of suspect vehicle detection, Kaza and Chen \cite{kaza:suspectVehicle} research the border safety to help Customs and Border Protection (CBP) agents , USA, to search vehicles entering the country at land borders that potentially involved in criminal activity.
-They can identify the criminal or suspect vehicles and other partner vehicles that crossing together and potentially involved in criminal activities. This literature review use association analysis by using mutual information (MI) and modify the MI formulation to incorporate domain heuristics by using cross-jurisdictional criminal data from border-area jurisdictions.
-The heuristic-enhanced MI performs significantly batter than classical MI \cite{kaza} in identifying partner of potentially criminal or suspect vehicles.
+In the field of suspect vehicle detection, Kaza and Chen \cite{kaza:suspectVehicle} research the border safety to help Customs and Border Protection (CBP) agents , USA, to search for the vehicles entering the country at land borders that potentially involved in criminal activity.
 %
-Umedu et al. \cite{Umedu} propose the dangerous-vehicle-detection protocol (DVDP) to detect dangerous vehicles on roads and highways that violate the permitted speed limit.
+They can identify the criminal/suspect vehicles and other partner vehicles that crossing together and potentially involved in criminal activities. 
+%
+This literature review uses association analysis by using mutual information (MI) and modifies the MI formulation to incorporate domain heuristics by using cross-jurisdictional criminal data from border-area jurisdictions.
+%
+The heuristic-enhanced MI performs significantly batter than classical MI \cite{kaza} in identifying partner of potentially criminal/suspect vehicles.
+%
+Umedu et al. \cite{Umedu} proposed the dangerous-vehicle-detection protocol (DVDP) to detect dangerous vehicles on roads and highways that violate the permitted speed limit.
+%
 In DVDP, they use ad hoc communications to forward hop-by-hop warning information (including its position, speed, time, and collected IDs). 
+%
 When a vehicle receives warning information, it will start to observe its surrounding vehicle and it is estimated the speed. 
-If the estimated speed exceeds the permitted speed, such vehicle is considered as a suspected vehicles and the updated warning information is then further propagated to vehicles ahead. 
+%
+If the estimation speed exceeds the permitted speed, such vehicle is considered as a suspected vehicles and the updated warning information is then further propagated to vehicles ahead. 
+%
 The suspected vehicle will be considered as a dangerous vehicle by the suspected vehicle where multiple other vehicles witnessed the speed violation.
 %
-Kaza et al. \cite{kaza:TopologicalAnalysis} use the combination analysis of law enforcement information and data generated by vehicle license plate readers at international borders to identify suspicious vehicles and people at ports of entry.
+Kaza et al. \cite{kaza:TopologicalAnalysis} uses the combination analysis of law enforcement information and data generated by vehicle license plate readers at international borders to identify suspicious vehicles and people at ports of entry.
+%
 They analyze the topological characteristics of criminal activity networks (CANs) of individuals and vehicles in a multiple jurisdiction scenario. 
+%
 The vehicular relationships and border-crossing information can aid in securing the border and transportation infrastructure. 
 %
-Furthermore, Thiel \cite{Thiel} use The VIRTUAL GUARD system for detecting potential criminal activity in public areas. 
-This system will alarm when the observed activities of particular vehicles and pedestrians match any of the pre-defined suspect behaviour criteria programmed into the system. 
+Furthermore, Thiel \cite{Thiel} uses the VIRTUAL GUARD system for detecting potential criminal activity in public areas. 
+%
+This system will be alarmed when the observed activities of particular vehicles and pedestrians match any of the pre-defined suspect behavior criteria programmed into the system. 
+%
 In addition, the system uses computer-controlled Pan Tilt Zoom (PTZ) cameras to obtain close-up video recordings of any vehicles and pedestrians at the scene.
 
-Although the above proposals are useful for vehicle detection to detect the suspect vehicle, we focus on the detection of suspect vehicles with forged license plate. 
-Therefore, we review studies about reputation algorithm and association analysis concept which we will discuss in the next subsection.
+Although the above proposals are useful for vehicle detection to identify the suspect vehicle, we focus on the detection of suspect vehicles with forged license plate. 
+%
+Therefore, we review the studies about reputation algorithm and association analysis concept which we will discuss in the next subsection.
 
 \subsection{Reputation Algorithm}
 The concept of reputation has been used to classify objects in a domain or community. 
-An object with a higher reputation score gain more attraction than an object with a lower reputation score.  
-Reputation concept has been applied to the several problems in vehicle-to-vehicle communication system.  
+%
+An object with a higher reputation score gain more attraction than an object with a lower reputation score. 
+% 
+Reputation concept has been applied to the several problems in vehicle-to-vehicle communication system. 
+% 
 In \cite{QinLi}, it works well for allowing evaluation of message reliability in vehicular ad hoc network (VANET) environments. 
-If the vehicle that generates this message has a sufficiently high reputation, A message is considered reliable.
+%
+If the vehicle that generates this message has a sufficiently high reputation, a message is considered reliable.
 %
 Dhurandher et al. \cite{Dhurandher} propose vehicular security to detect and isolate malicious nodes in VANET.
 %
 Ayday et al. \cite{Ayday} develop the Iterative Trust and Reputation Mechanism (ITRM) for DELAY-TOLERANT Networks (DTNs) which enables every node to evaluate other nodes based on their past behavior.
-ITRM takes advantage of an iterative mechanism to detect
-and isolate the malicious nodes from the network even in the presence of the attacks on the trust and detection mechanisms.
-%and providing reliable reputation scores for vehicles in VANET initial deployment environment \cite{park}.
-
-The reputation concept is also be applied to other practical applications. For example, 
 %
-Xie and Wang \cite{Xie} present a Collaboration-based Autonomous email REputation (CARE) system to rate both spam domains
-and nonspam domains in an autonomous manner.
-%Bradley Taylor \cite{DBLP:taylor} uses reputation to classify authenticated sender's domain as either spammy or not spammy within a large webmail service.  
+The ITRM takes advantage of an iterative mechanism to detect and isolate the malicious nodes from the network even in the presence of the attacks on the trust and detection mechanisms.
+
+The reputation concept can also be applied to other practical applications. 
+%
+For example, Xie and Wang \cite{Xie} present a Collaboration-based Autonomous email REputation (CARE) system to rate both spam domains and nonspam domains in an autonomous manner.
+% 
 Altman and Tennenholtz \cite{altman} uses the axiomatic approach to deal PageRank, the most famous page ranking algorithm.
 
 We propose the use of this concept to identify criminal vehicles that crossing the checkpoint. 
+%
 A high reputation score represents a criminal vehicle, whereas low reputation score represents a normal vehicle.
 
 \subsection{Association Analysis Concept}
@@ -291,7 +313,7 @@ Number of criminal vehicles crossing the checkpoint in three months& 513\\
 \label{fig:diagram}
 \end{figure*}
 
-Figure \ref{fig:diagram} shows the research design and the evolution process of criminal or suspect vehicle detection at the checkpoint. This diagram is divided into three sections: 
+Figure \ref{fig:diagram} shows the research design and the evolution process of criminal/suspect vehicle detection at the checkpoint. This diagram is divided into three sections: 
 1) Input section consists of the real time checkpoint crossing data set in three months, the one year records of checkpoint crossing data set, the blacklist of criminal vehicle data set, and criminal activity data set. 
 2) Processing section consists of matching score module to detect the criminal vehicles that crossing the checkpoint and vehicle association with criminal activity score module to detect the suspect vehicles that crossing the checkpoint. In this research, we focus on the processing section shown in Figure \ref{fig:diagram} which is explained in the following sub-sections. 
 3) Output section serves as the alert of the criminal vehicle or suspect vehicle if the system detects the criminal vehicles or suspect vehicles that crossing the checkpoint. 
@@ -491,7 +513,7 @@ $$ \text{Detection Accurate Rate} =  \frac{\text{TP Rate + TN Rate}}{\text{2}} $
 Table \ref{table_variableSysPerf} summarizes the notation for The System Performance Analysis.
 The results obtained from the vehicle detection tests in three months is shown in Table \ref{table_vehiclesDetected}.
 As a results, this novel process can detect 147 suspect vehicles more than the traditional process or equal to 138.68\% higher.
-Figure \ref{fig:graphresults} and Table \ref{table_results} show the results of the system performance analysis of the novel process that have the criminal or suspect vehicle detection rate is equal to 49.32\% and detection accurate rate is equal to 74.09\% which is an acceptable accurate rate. These results show that this technique can improve the detection capability of the suspect vehicle detection process.
+Figure \ref{fig:graphresults} and Table \ref{table_results} show the results of the system performance analysis of the novel process that have the criminal/suspect vehicle detection rate is equal to 49.32\% and detection accurate rate is equal to 74.09\% which is an acceptable accurate rate. These results show that this technique can improve the detection capability of the suspect vehicle detection process.
 
 %put this in Notation
 \begin{table}
