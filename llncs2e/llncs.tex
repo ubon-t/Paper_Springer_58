@@ -176,16 +176,7 @@ Experimental results are shown in Section 4, and discussed in Section 5.
 %
 Section 6 concludes and presents future directions.
 %
-%Reputation concept is a technique to classify object that commonly applied to various systems to make effective automatic detection, such as vehicle-to-vehicle communication \cite{QinLi}, \cite{Dhurandher}, \cite{Ayday}, filtering email spam \cite{Xie}, \cite{Chirita:Mailrank}, \cite{West:Spam}, \cite{Zhang:Ipgrouprep}, ecommerce \cite{altman}, \cite{page}, \cite{WangLin}, etc.
-%In addition, vehicle detection by only data classification process may be insufficient. Therefore, the association analysis process should be used together to increase the detection accuracy.
-%The traditional suspect vehicle detection process of comparing criminal license plates and vehicle license plates utilizing the matching of alphabet character is not effective. If the characters do not match any one character, the system can not detect criminal/suspect vehicles with forged license plate.
 
-%In this paper, we propose the approach using reputation concept to detect criminal vehicles crossing the checkpoint whose license plates match the blacklist. 
-%In addition, we use association analysis concept to detect the suspect vehicles which license plates do not match the blacklist, however this method uses color, brand and type of vehicles matching the blacklist to identify the vehicles that potentially involve in criminal activity.
-%The aim of this work is to improve the detection capability of suspect vehicle detection system.
-
-%In the next section, we discuss background information and previous studies using reputation algorithm and association analysis concept. Section III explains the research testbed and research design. Experimental results are shown in Section IV, and discussed in Section V. Section VI concludes and presents future directions.
-%
 \section{Literature Review}
 %
 The literature reviews of related our research are divided into following subsections.
@@ -254,6 +245,8 @@ Dhurandher et al. \cite{Dhurandher} propose vehicular security to detect and iso
 Ayday et al. \cite{Ayday} develop the Iterative Trust and Reputation Mechanism (ITRM) for DELAY-TOLERANT Networks (DTNs) which enables every node to evaluate other nodes based on their past behavior.
 %
 The ITRM takes advantage of an iterative mechanism to detect and isolate the malicious nodes from the network even in the presence of the attacks on the trust and detection mechanisms.
+%
+Kerdsri et al. \cite{kerdsri} proposed the use of significant of messages to categorize the prioritization of data to transmit.
 
 The reputation concept can also be applied to other practical applications. 
 %
@@ -267,10 +260,15 @@ A high reputation score represents a criminal vehicle, whereas low reputation sc
 
 \subsection{Association Analysis Concept}
 Association analysis concept has been widely applied in various systems in previous research.
+%
 For example, the concept of mutual information have been used to estimate word association norms between words in English texts \cite{chruch} and to extract a triple of binary strings a, b, c \cite{romashchenko}.
+%
 Kaza et al. \cite{kaza} used association analysis by using the concept of mutual information measurement to identify potentially target vehicles that cross the border frequently with the vehicles which are involved in criminal activity.
+%
 In addition, association analysis by using the idea of association rule has also been used to automatically detect the ischemic beats in long duration electrocardiographic (ECG) recordings \cite{Exarchos} and to extract valuable industrial data from massive data storage \cite{zhuang}.
+%
 G. Miao et al. \cite{miao} used a new ranking algorithm, based on Latent Association Analysis (LAA) by considering
+%
 the semantic associations among document pairs to rank target documents using the latent factor.
 
 %
@@ -278,7 +276,13 @@ the semantic associations among document pairs to rank target documents using th
 %
 \subsection{Research Testbed}
 The testbed for this research includes the blacklist of the criminal vehicle data set and the criminal activity data set obtained from criminal report database of Defence Technology Institute (DTI), Thailand.
-Moreover, this testbed consists of the lists of the checkpoint crossing data set from various sensors includes the license plate, vehicle brand, vehicle color, vehicle type, checkpoint, crossing date and time. The checkpoint crossing data set is divided into two categories: 1) The one year records. 2) The real time checkpoint crossing records in three months. Details of these data sets are shown in Table \ref{table_inputData}.
+%
+Moreover, this testbed consists of the lists of the checkpoint crossing data set from various sensors includes the license plate, vehicle brand, vehicle color, vehicle type, checkpoint, crossing date and time.
+%
+ The checkpoint crossing data set is divided into two categories: 
+ 1) The one year records. 
+ 2) The real time checkpoint crossing records in three months. 
+ Details of these data sets are shown in Table \ref{table_inputData}.
 
 \begin{table}
 \caption{Summary of Input Data Set}
@@ -292,7 +296,7 @@ $Input Data Set$ & $Summary$\\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
- Number of the criminal vehicles in blacklist & 4801 \\
+Number of the criminal vehicles in blacklist & 4801 \\
 Criminal activity records & 1972\\
 The one year checkpoint crossing records & 992017\\
 The real time checkpoint crossing records in three months & 281089\\
@@ -313,10 +317,15 @@ Number of criminal vehicles crossing the checkpoint in three months& 513\\
 \label{fig:diagram}
 \end{figure*}
 
-Figure \ref{fig:diagram} shows the research design and the evolution process of criminal/suspect vehicle detection at the checkpoint. This diagram is divided into three sections: 
-1) Input section consists of the real time checkpoint crossing data set in three months, the one year records of checkpoint crossing data set, the blacklist of criminal vehicle data set, and criminal activity data set. 
-2) Processing section consists of matching score module to detect the criminal vehicles that crossing the checkpoint and vehicle association with criminal activity score module to detect the suspect vehicles that crossing the checkpoint. In this research, we focus on the processing section shown in Figure \ref{fig:diagram} which is explained in the following sub-sections. 
-3) Output section serves as the alert of the criminal vehicle or suspect vehicle if the system detects the criminal vehicles or suspect vehicles that crossing the checkpoint. 
+Figure \ref{fig:diagram} shows the research design and the evolution process of criminal/suspect vehicle detection at the checkpoint. 
+%
+This diagram is divided into three sections: 
+\begin{enumerate}
+	\item Input section consists of the real time checkpoint crossing data set in three months, the one year records of checkpoint crossing data set, the blacklist of criminal vehicle data set, and criminal activity data set. 
+	\item Processing section consists of matching score module to detect the criminal vehicles that crossing the checkpoint and vehicle association with criminal activity score module to detect the suspect vehicles that crossing the checkpoint. 
+	In this research, we focus on the processing section shown in Figure \ref{fig:diagram} which is explained in the following sub-sections.
+	\item Output section serves as the alert of the criminal vehicle or suspect vehicle if the system detects the criminal vehicles or suspect vehicles that crossing the checkpoint. 
+\end{enumerate}
 
 \subsubsection{Matching Score Module}
 %
@@ -353,22 +362,23 @@ end for
 \label{fig:matchingAlgo}
 \end{figure}
 
-%\begin{figure}
-%\vspace{1.8mm}
-%\centering
-%\includegraphics[width=1\textwidth]{images/MatchingAlgorithm.jpg}
-%\caption{Matching score module algorithm.}
-%\label{fig:matchingAlgo}
-%\end{figure}
+
+Matching Score Module is the criminal vehicle detection process. 
 %
-Matching Score Module is criminal vehicle detection process. 
 First, we define attributes for classification and assign weight to each of the attributes. 
-Higher weight is assigned to higher significant attributes.
-In this research, we select the license plate, vehicle color, vehicle brand, and vehicle type to be used in the classification and we assign higher weight to license plate than vehicle color, vehicle brand, and vehicle type. 
+%
+The higher weight is assigned to higher significant attributes.
+%
+In this research, we select the license plate, color, brand, and type of vehicle to be used in the classification and we assign higher weight to license plate than color, brand, and type of vehicle.
+% 
 The system compares the real time checkpoint crossing records in three months and criminal vehicle records in the blacklist by using following attributes: license plate, vehicle color, vehicle brand, and vehicle type. 
+%
 Subsequently, it computes the sum of all of the weighted attribute. 
-The weighted sum is a single number to compare with the threshold.  
+%
+The weighted sum is a single number to compare with the threshold.
+%  
 If weighted sum is greater than the high score threshold, referred to as High Matching Score, vehicle crossing the checkpoint will be considered as criminal vehicle and will be processed in the Alert Module. 
+%
 If weighted sum is less than the high score threshold and also greater than the low score threshold, referred to as Middle Matching Score, vehicle crossing the checkpoint will be considered as target vehicle and will be processed in the Vehicle Association with Criminal Activity Score Module. 
 
 High Matching Score is calculated by the following attribute-matching condition: at least license plate matches with the blacklist.
@@ -388,7 +398,7 @@ $Variables$ & $Description$\\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
- VCDataLicenseplate & The license plate of vehicle that crossing the checkpoint. \\
+VCDataLicenseplate & The license plate of vehicle that crossing the checkpoint. \\
 VCDataColor & The color of vehicle that crossing the checkpoint.\\
 VCDataBrand & The brand of vehicle that crossing the checkpoint.\\
 VCDataType & The type of vehicle that crossing the checkpoint.\\
@@ -442,23 +452,23 @@ end if
 \label{fig:activityAlgo}
 \end{figure}
 
-%\begin{figure}
-%\vspace{1.8mm}
-%\centering
-%\includegraphics[width=1\textwidth]{images/activityAlgorithm2.jpg}
-%\caption{Vehicles association with criminal activity score module algorithm.}
-%\label{fig:activityAlgo}
-%\end{figure}
 
 \subsubsection{Vehicle Association with Criminal Activity Score Module}
 This module is a suspect vehicle detection process using association analysis concept to identify the vehicles that are potentially involved in criminal activities. 
-We determine the number of all the one year checkpoint crossing lists of target vehicle by considering the matching of license plate, vehicle color, vehicle brand, and vehicle type. 
+%
+We determine the number of all the one year checkpoint crossing lists of target vehicle by considering the matching of license plate, color, brand, and type of vehicle. 
+%
 Consequently, we analyze the relationship between each of the criminal activity with all the one year checkpoint crossing records of target vehicle, and we further restricted the set to contain only checkpoint crossing records of target vehicle that already crossed the checkpoint near the location, date, and time of criminal activities. 
+%
 Such set can be indicated the number of involvement in criminal activities of target vehicle. 
-Then we can calculated the association ratio by using in (1) by computing the fraction of number of involvement in criminal activities of target vehicle and number of the checkpoint crossing records of target vehicle to compare with the defined threshold.
+%
+Then we can calculated the association ratio by using in Eq. \ref{eq:association ratio} by computing the fraction of number of involvement in criminal activities of target vehicle and number of the checkpoint crossing records of target vehicle to compare with the defined threshold.
+
 \begin{eqnarray} 
 \alpha \quad =\quad \frac { \nu  }{ \varsigma  }
+\label {eq:association ratio}
 \end{eqnarray}
+
 where\mbox{ }\\
 $\alpha$ = association ratio. \mbox{ }\\
 $\nu$ = number of involvement in criminal activities of target vehicle.\mbox{ }\\
@@ -499,10 +509,13 @@ HScore & The defined threshold.\\
 
 \section{Experimental Results}
 To analyze system performance, there are four factors for analysis as follows:
-1) True positive (TP) is the number of the criminal and suspect vehicles that are analyzed as the criminal and suspect vehicles.  
-2) True negative (TN) is the number of the normal vehicles that are analyzed as the normal vehicles. 
-3) False positive (FP) is the number of the normal vehicles that are analyzed as the criminal and suspect vehicles. 
-4) False negative (FN) is the number of the criminal and suspect vehicles that are analyzed as the normal vehicles. 
+\begin{enumerate}
+	\item True positive (TP) is the number of the criminal and suspect vehicles that are analyzed as the criminal and suspect vehicles.  
+	\item True negative (TN) is the number of the normal vehicles that are analyzed as the normal vehicles. 
+	\item False positive (FP) is the number of the normal vehicles that are analyzed as the criminal and suspect vehicles. 
+	\item False negative (FN) is the number of the criminal and suspect vehicles that are analyzed as the normal vehicles.
+\end{enumerate}
+ 
 Such factors can be calculated by using this formula:\\
 $$ \text{TP Rate} =  \frac{\text{TrueCSV}}{\text{TofCSV}} $$\\
 $$ \text{FN Rate} =  \frac{\text{FalseCSV}}{\text{TofCSV}} $$\\
@@ -511,9 +524,14 @@ $$ \text{FP Rate} =  \frac{\text{FalseNV}}{\text{TofNV}} $$\\
 $$ \text{Detection Accurate Rate} =  \frac{\text{TP Rate + TN Rate}}{\text{2}} $$
 
 Table \ref{table_variableSysPerf} summarizes the notation for The System Performance Analysis.
+%
 The results obtained from the vehicle detection tests in three months is shown in Table \ref{table_vehiclesDetected}.
+%
 As a results, this novel process can detect 147 suspect vehicles more than the traditional process or equal to 138.68\% higher.
-Figure \ref{fig:graphresults} and Table \ref{table_results} show the results of the system performance analysis of the novel process that have the criminal/suspect vehicle detection rate is equal to 49.32\% and detection accurate rate is equal to 74.09\% which is an acceptable accurate rate. These results show that this technique can improve the detection capability of the suspect vehicle detection process.
+%
+Figure \ref{fig:graphresults} and Table \ref{table_results} show the results of the system performance analysis of the novel process that have the criminal/suspect vehicle detection rate is equal to 49.32\% and detection accurate rate is equal to 74.09\% which is an acceptable accurate rate. 
+%
+These results show that this technique can improve the detection capability of the suspect vehicle detection process.
 
 %put this in Notation
 \begin{table}
@@ -590,13 +608,31 @@ Detection Accurate Rate & 60.33\% & 74.09\%\\
 %
 
 \section{Discussion}
-The novel process still gain higher FP rate than the traditional process because using only color, brand and type of vehicles matching the blacklist can not separate the normal vehicles out of the target vehicles. However, we intend to improve the normal vehicle separation process by using the target vehicle data from Matching Score Module matching the vehicle database of Department of Land Transport (DLT), Thailand. If the target vehicle data do not match the DLT database, it is considered as the illegal vehicles and processed in the Vehicle Association with Criminal Activity Score Module. In addition, the use of the DLT database can improve the FN rate.
+The novel process still gain higher FP rate than the traditional process because using only color, brand and type of vehicles matching the blacklist can not separate the normal vehicles out of the target vehicles. 
+%
+However, we intend to improve the normal vehicle separation process by using the target vehicle data from Matching Score Module matching the vehicle database of Department of Land Transport (DLT), Thailand. 
+%
+If the target vehicle data do not match the DLT database, it is considered as the illegal vehicles and processed in the Vehicle Association with Criminal Activity Score Module. In addition, the use of the DLT database can improve the FN rate.
 
 \section{Conclusion and Future Directions}
 This research proposes the use of vehicle reputation in couple with association analysis concept to improve the detection capability of suspect vehicle detection system.
+%
 The testing results from the previous section shows that the blacklist of criminal vehicles and criminal activity records obtained from criminal report database of DTI can be used to enhance the detection capability of suspect vehicle detection system and can address the limitations existing in the traditional process. 
+%
 In the future work, we plan to test this algorithm with the real scenario to compare with the formula in this research. 
-In addition, we intend to explore the behavior of criminal vehicles crossing the checkpoint. This will allow us to analyze the crossing the checkpoint patterns of criminal vehicles and improve the suspect vehicle detection. Additionally, we intend to extend the suspect vehicle detection by using the vehicle crossing the checkpoint matching the vehicle database of DLT. This can be used to detect the illegal vehicles for reducing error of the normal vehicles detected as the suspect vehicles.
+%
+In addition, we intend to explore the behavior of criminal vehicles crossing the checkpoint. 
+%
+This will allow us to analyze the crossing the checkpoint patterns of criminal vehicles and improve the suspect vehicle detection. 
+%
+Additionally, we intend to extend the suspect vehicle detection by using the vehicle crossing the checkpoint matching the vehicle database of DLT.
+%
+This can be used to detect the illegal vehicles for reducing error of the normal vehicles detected as the suspect vehicles.
+%
+Moreover, we plan to study the Automatic Vehicle Detection System that using the camera to automatically determine the color, brand and model of vehicle to expedite the vehicle suspect process.
+
+\section{Acknowledgment}
+This work is funded by basic research program from research and development department, Defence Technology Institute, Thailand.
 
 
 %\bibauthoryear
@@ -644,13 +680,11 @@ S. Dhurandher, M. Obaidat, A. Jaiswal, A. Tiwari, and A. Tyagi: Vehicular securi
 \bibitem{Ayday}
 E. Ayday and F. Fekri: An iterative algorithm for trust management and adversary detection for delay-tolerant networks. Mobile Computing, IEEE Transactions on, vol. 11, no. 9, pp. 1514-1531 (2012)
 
+\bibitem{kerdsri}
+J. Kerdsri, K. Wipusitwarkun, DORSI: Data-wise Opportunistic Routing with Spatial Information, JCIT: , Vol. 8, No. 13, pp. 91 ~ 103, 2013
+
 \bibitem{Xie}
 M. Xie and H. Wang: A collaboration-based autonomous reputation system for email services. in INFOCOM, 2010 Proceedings IEEE, pp. 1-9 (2010)
-%\bibitem{DBLP:taylor} Bradley Taylor: Sender reputation in a large webmail service, in CEAS, 2006.
-
-%\bibitem{Wang:ARTSense}
-%X. Wang, W. Cheng, P. Mohapatra, and T. Abdelzaher: Artsense: Anonymous reputation and trust in participatory sensing, in INFOCOM, 2013 Proceedings IEEE, April 2013, pp. 2517-2525.
-%\bibitem{lazzari} Lazzari, L. and Mari, M. and Poggi, A.: A collaborative and multi-agent system for e-mail filtering and classification, in Collaborative Computing: Networking, Applications and Worksharing, 2005 International Conference on, 2005, pp. 8 pp.-
 
 \bibitem{Chirita:Mailrank} 
 P.-A. Chirita, J. Diederich, and W. Nejdl: Mailrank: Using ranking for spam detection. In: Proceedings of the 14th ACM International Conference on Information and Knowledge Management, ser. CIKM '05. New York, NY, USA: ACM, pp. 373-380 (2005)
@@ -664,15 +698,10 @@ H. Zhang, H. Duan, W. Liu, and J. Wu: Ipgrouprep: A novel reputation based syste
 \bibitem{altman} 
 A. Altman and M. Tennenholtz: Ranking systems: The pagerank axioms. In: Proceedings of the 6th ACM Conference on Electronic Commerce, ser. EC '05. New York, NY, USA: ACM, pp. 1-8 (2005)
 
-%\bibitem{ding} Qing Ding and Xi Li and Ming Jiang and Xuehai Zhou: Reputation management in vehicular ad hoc networks, in Multimedia Technology (ICMT), 2010 International Conference on, Oct 2010, pp. 1-5.
-
-%\bibitem{park} Soyoung Park and Aslam, B. and Zou, C.: Long-term reputation system for vehicular networking based on vehicle's daily commute routine, in Consumer Communications and Networking Conference (CCNC), 2011 IEEE, Jan 2011, pp. 436-441.
-
 \bibitem{page} Page, L. and Brin, S. and Motwani, R. and Winograd, T.: The pagerank citation ranking: Bringing order to the web. In: Proceedings of the 7th International World Wide Web Conference, Brisbane, Australia, pp. 161-172 (1998)
 
 \bibitem{WangLin}
 Y. Wang and K.-J. Lin: Reputation-oriented trustworthy computing in e-commerce environments. Internet Computing, IEEE, vol. 12, no. 4, pp. 55-59 (2008)
-%\bibitem{resnick} Resnick, Paul and Zeckhauser, Richard: Trust among strangers in Internet transactions: Empirical analysis of eBay\'s reputation system, in The Economics of the Internet and E-Commerce, ser. Advances in Applied Microeconomics, M. R. Baye, Ed. Elsevier Science, 2002, vol. 11, pp. 127-157. [Online]. Available: http://www.si.umich.edu/ presnick/papers/ebayNBER/index.html
 
 \bibitem{kaza:suspectVehicle}
 S. Kaza and H. Chen: Suspect vehicle identification for border safety. in Intelligence and Security Informatics, ser. Studies in Computational Intelligence, H. Chen and C. Yang (eds). vol. 135, pp. 305-318. Springer Berlin Heidelberg (2008) 
@@ -692,14 +721,11 @@ G. Thiel: Automatic cctv surveillance-towards the virtual guard. Aerospace and E
 
 \bibitem{Exarchos}
 T. Exarchos, C. Papaloukas, D. Fotiadis, and L. Michalis: An association rule mining-based methodology for automated detection of ischemic ecg beats. Biomedical Engineering, IEEE Transactions on, vol. 53, no. 8, pp. 1531-1540 (2006)
-%\bibitem{li} Li Xiang-wei and Zhao Shuang-ping: A novel web authoritative page mining algorithm based on association analysis, in Knowledge Acquisition and Modeling (KAM), 2011 Fourth International Symposium on, Oct 2011, pp. 136-138.
+
 
 \bibitem{zhuang} Ziyun Zhuang and Bo Zhang: Application of association analysis in digital content industry. in Computational Intelligence and Design (ISCID), 2012 Fifth International Symposium on, vol. 1, pp. 18-21 (2012)
 
 \bibitem{miao} Miao, Gengxin and Guan, Ziyu and Moser, Louise E. and Yan, Xifeng and Tao, Shu and Anerousis, Nikos and Sun, Jimeng: Latent association analysis of document pairs. In: Proceedings of the 18th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, ser. KDD '12. New York, NY, USA: ACM, pp. 1415-1423 (2012)
-
-
-
 
 \end{thebibliography}
 %
